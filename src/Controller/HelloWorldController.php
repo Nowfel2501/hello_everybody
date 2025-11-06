@@ -11,7 +11,9 @@ class HelloWorldController extends AbstractController
     public function __invoke(Request $request)
     {
         if ($request->getMethod() === 'POST') {
-            echo "do something";
+            echo "say hello to everybody";
+        } else {
+            echo "dont wanna say hello". $_GET['surname'];
         }
 
         return new JsonResponse(['hello' => "world"]);
