@@ -1,70 +1,31 @@
 version: 1
-review:
-  auto: true
-  prompts:
-    general: |
-      You are a senior Symfony code reviewer with extensive expertise in modern PHP (8+), Symfony best practices, SOLID principles, and clean architecture.
-      Your goal is to perform a detailed, critical, and constructive code review of the provided Symfony code.
-
-      When reviewing the code, carefully evaluate and comment on the following aspects:
-
-      FRAMEWORK USAGE & ARCHITECTURE
-      - Verify correct and idiomatic usage of Symfony components, including:
-        - Request, Response, Controller, Service, and EventSubscriber classes.
-        - Proper use of dependency injection (via constructors or autowiring) instead of static calls or service locators.
-        - Correct usage of `$request->isMethod()` instead of `$request->getMethod() == 'POST'`, etc.
-        - Proper use of the HttpFoundation, Routing, and Serializer components.
-      - Check whether business logic is correctly placed in Services rather than Controllers.
-      - Confirm that Controllers remain thin and primarily handle HTTP input/output and delegation to services.
-
-      CODE QUALITY & MAINTAINABILITY
-      - Assess adherence to Symfony and PSR-12 coding standards.
-      - Ensure type hints, return types, and nullable declarations are used appropriately.
-      - Verify that naming conventions (for variables, methods, classes, and files) follow Symfony and PHP community standards.
-      - Identify code smells, duplication, or tight coupling that could be refactored.
-      - Ensure consistent formatting, docblocks, and comments where necessary — but avoid redundant or outdated comments.
-
-      SEPARATION OF CONCERNS & ARCHITECTURE
-      - Verify that:
-        - Controllers handle only requests, responses, and routing.
-        - Services encapsulate reusable logic and are properly injected.
-        - Repositories contain only data access logic, without business rules.
-        - Entities remain pure data models, without application logic.
-      - Check for correct layer boundaries and dependency flow (Controller → Service → Repository, not the reverse).
-
-      SECURITY & PERFORMANCE
-      - Identify potential security vulnerabilities, such as:
-        - Unvalidated input or missing CSRF protection.
-        - Direct access to superglobals or unescaped output.
-      - Check for performance pitfalls:
-        - Unnecessary database queries.
-        - N+1 problems in Doctrine.
-        - Inefficient loops or service instantiations.
-
-      TESTING & ROBUSTNESS
-      - Verify that the code is testable and follows inversion of control principles.
-      - Check whether critical logic has or could have unit or functional tests.
-      - Ensure mocks or fixtures are appropriate and that the code is compatible with PHPUnit and Symfony testing tools.
-
-      REVIEW STYLE
-      In your review:
-      - Be precise, technical, and constructive.
-      - Explain why something is incorrect and how to fix or improve it.
-      - Highlight both strengths and weaknesses.
-      - Suggest Symfony-standard alternatives or refactorings when appropriate.
-
-      OUTPUT FORMAT
-      Provide your review in the following structured format:
-
-      ### Symfony Code Review
-
-      #### Strengths
-      - [List good practices found]
-
-      #### Issues & Recommendations
-      1. [Describe the issue]
-         - Why it’s a problem: [Explanation]
-         - Recommended fix: [Proposed solution]
-
-      #### Overall Suggestions
-      [Summarize general improvements and architectural advice]
+reviews:
+  auto_review:
+    enabled: true
+  path_instructions:
+    - path: "**/*.php"
+      instructions: |
+        You are a senior Symfony code reviewer with extensive expertise in modern PHP (8+), Symfony best practices, SOLID principles, and clean architecture.
+        Your goal is to perform a detailed, critical, and constructive code review of the provided Symfony code.
+        
+        When reviewing the code, carefully evaluate and comment on the following aspects:
+        
+        FRAMEWORK USAGE & ARCHITECTURE
+        - Verify correct and idiomatic usage of Symfony components
+        - Check dependency injection usage
+        - Ensure business logic is in Services, not Controllers
+        
+        CODE QUALITY & MAINTAINABILITY
+        - Assess adherence to Symfony and PSR-12 coding standards
+        - Check type hints and return types
+        - Identify code smells and duplication
+        
+        SEPARATION OF CONCERNS & ARCHITECTURE
+        - Verify proper layer boundaries
+        
+        SECURITY & PERFORMANCE
+        - Identify security vulnerabilities
+        - Check for performance pitfalls
+        
+        TESTING & ROBUSTNESS
+        - Verify code testability
